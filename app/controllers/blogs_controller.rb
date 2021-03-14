@@ -17,9 +17,11 @@ class BlogsController < ApplicationController
     end
   end
   def update
-
   end
   def show
+    @blog = Blog.find(params[:id])
+  end
+  def edit
     @blog = Blog.find(params[:id])
   end
   private
