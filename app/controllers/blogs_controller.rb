@@ -8,8 +8,16 @@ class BlogsController < ApplicationController
   end
   def create
     @blog = Blog.create(blog_params)
-    # new_blog_pathというPrefixを書くことで、"/blogs/new"というURLの指定をします、という意味になる。
-    redirect_to new_blog_path
+    if @blog.save
+      # 一覧画面へ遷移しブログ作成しました！のメッセージを表示する
+      redirect_to blogs_path, notice: "ブログを作成しました！"
+    elseg
+      # 入力フォーム再描画
+      render :new
+    end
+  end
+  def update
+
   end
   def show
     @blog = Blog.find(params[:id])
