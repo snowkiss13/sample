@@ -1,4 +1,5 @@
 class BlogsController < ApplicationController
+  beore_action :set_blog, only: [:show, :edit, :update]
   def index
     # 全てのブログを取得する命令
     @blogs = Blog.all
@@ -17,7 +18,6 @@ class BlogsController < ApplicationController
     end
   end
   def update
-    @blog = Blog.find(params[:id])
     if @blog.update(blog_params)
       redirect_to blogs_path, notice: "ブログを編集しました！"
     else
@@ -25,13 +25,14 @@ class BlogsController < ApplicationController
     end
   end
   def show
-    @blog = Blog.find(params[:id])
   end
   def edit
-    @blog = Blog.find(params[:id])
   end
   private
   def blog_params
     params.require(:blog).permit(:title, :content)
+  end
+  def set_blog
+    @blog = Blog.find(params[:id])
   end
 end
