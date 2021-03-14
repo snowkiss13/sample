@@ -1,5 +1,5 @@
 class BlogsController < ApplicationController
-  beore_action :set_blog, only: [:show, :edit, :update]
+  before_action :set_blog, only: [:show, :edit, :update]
   def index
     # 全てのブログを取得する命令
     @blogs = Blog.all
@@ -12,7 +12,7 @@ class BlogsController < ApplicationController
     if @blog.save
       # 一覧画面へ遷移しブログ作成しました！のメッセージを表示する
       redirect_to blogs_path, notice: "ブログを作成しました！"
-    elseg
+    else
       # 入力フォーム再描画
       render :new
     end
